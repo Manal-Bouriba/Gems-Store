@@ -1,0 +1,13 @@
+ {% autoescape off %}
+    Hello {{user.user_name}},
+
+    We're sending you this e-mail to inform you that you're account has successfully been created! 
+    All you have to do now is click on the link provided below to finish the finish the activation process,
+
+    http://{{ domain }}{%url 'accounts:activate' uidb64=uid token=token %}
+
+
+    Cheers!
+    Gems Store.
+ 
+ {% endautoescape %}

@@ -1,0 +1,145 @@
+
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>	
+        <script src="https://kit.fontawesome.com/5e3584c269.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+{% block content %}
+<div class="container" style="margin-bottom: 175px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+                <!-- slides -->
+                <div class="carousel-inner">
+                    {%for f in featuredgames%}
+                        {% if forloop.first %}
+                    <div class="carousel-item active"> <a href="{{f.get_absolute_url}}"><img src="{{ f.featurepic.url }}" alt="Hills"></a> </div>
+                        {% else %}
+                    <div class="carousel-item"> <a href="{{f.get_absolute_url}}"><img src="{{ f.featurepic.url }}" alt="Hills"></a> </div>
+                        {% endif %}
+                    {%endfor%}
+                </div> <!-- Left right --> <a class="carousel-control-prev" href="#custCarousel" data-slide="prev"> <span class="carousel-control-prev-icon"></span> </a> <a class="carousel-control-next" href="#custCarousel" data-slide="next"> <span class="carousel-control-next-icon"></span> </a> <!-- Thumbnails -->
+                <ol class="carousel-indicators list-inline">
+                    {%for f in featuredgames%}
+                    
+                        {%if forloop.counter0 == 0 %}
+                    <li class="list-inline-item active"> <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#custCarousel"> <img src="{{ f.featurepic.url }}" class="img-fluid"> </a> </li>
+                        {% elif forloop.counter0 == 1 %}
+                    <li class="list-inline-item"> <a id="carousel-selector-1" data-slide-to="1" data-target="#custCarousel"> <img src="{{ f.featurepic.url }}" class="img-fluid"> </a> </li>
+                        {% elif forloop.counter0 == 2 %}
+                    <li class="list-inline-item"> <a id="carousel-selector-2" data-slide-to="2" data-target="#custCarousel"> <img src="{{ f.featurepic.url }}" class="img-fluid"> </a> </li>
+                        {% elif forloop.counter0 == 3 %}
+                    <li class="list-inline-item"> <a id="carousel-selector-2" data-slide-to="3" data-target="#custCarousel"> <img src="{{ f.featurepic.url }}" class="img-fluid"> </a> </li>
+                        {% endif %}
+                    {%endfor%}
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mb-5">
+	<div class="row">
+        <div class="col-sm-1"> </div>
+        <div class="col-sm-11 mb-3">
+            <h4 style="color:#9637bb; font-size:21px;"> GAMES ON SALE</h4>
+        </div>
+    </div>
+    <div class="card-deck justify-content-center">
+    	
+	 <div class="row justify-content-center" >
+
+        
+        {% for product in products %}
+        <div class="col-auto mb-3"> 
+        <div class="card mx-0" style="width: 12rem; height:21rem; background-color: black;">
+            <a href="{{product.get_absolute_url}}"><img class="card-img-top img-fluid" style="width: 12rem; height:16rem;" src="{{ product.picture.url }}" alt="game"></a>
+            <div class="card-block">
+             <a href="{{product.get_absolute_url}}"><h5 class="card-title mt-1 mb-0" style="color:white; font-size: 18px; font-family: 'Segoe UI';"><b>{{product.title}}</b></h5><a href="#"></a>
+                <p class="card-text text-muted mb-1" style="color:white;">{{product.developer.title}}</p>
+                 <p class="item-price card-text text-muted"><strike >$25.00</strike> <b style="color:white;"> {{product.price}} </b></p>
+            </div>
+        </div>
+		</div>
+        <span></span>
+		{% endfor %}
+		
+     </div> 
+    </div>
+
+</div>
+
+
+<div class="container-fluid mb-5">
+	<div class="row">
+        <div class="col-sm-1"> </div>
+        <div class="col-sm-11 mb-3">
+            <h4 style="color:#9637bb; font-size:21px;"> NEW AND TRENDING</h4>
+        </div>
+    </div>
+    <div class="card-deck justify-content-center">
+    	
+	{% for product in newest%}
+		<div class="col-auto mb-3"> 
+        <div class="card mx-0" style="width: 12rem; height:21rem; background-color: black;">
+            <a href="{{product.get_absolute_url}}"><img class="card-img-top img-fluid" style="width: 12rem; height:16rem;" src="{{ product.picture.url }}" alt="Card image cap"></a>
+            <div class="card-block">
+             <a href="{{product.get_absolute_url}}"><h5 class="card-title mt-1 mb-0" style="color:white; font-size: 18px; font-family: 'Segoe UI';"><b>{{product.title}}</b></h5><a href="#"></a>
+                <p class="card-text text-muted mb-1" style="color:white;">{{product.developer.title}}</p>
+                 <p class="item-price card-text text-muted"><b style="color:white;"> {{product.price}}</b></p>
+            </div>
+        </div>
+		</div>
+        <span></span>
+        {%endfor%}
+       </div> 
+    </div>
+
+</div>
+
+
+<div class="container-fluid " style="margin-bottom:175px;">
+	<div class="row">
+        <div class="col-sm-1"> </div>
+        <div class="col-sm-11 mb-3">
+            <h4 style="color:#9637bb; font-size:21px;"> POPULAR</h4>
+        </div>
+    </div>
+    <div class="card-deck justify-content-center">
+    	
+	 <div class="row justify-content-center" >
+	{% for product in populargames%}
+		<div class="col-auto mb-3"> 
+        <div class="card mx-0" style="width: 12rem; height:21rem; background-color: black;">
+            <a href="{{product.get_absolute_url}}"><img class="card-img-top img-fluid" style="width: 12rem; height:16rem;" src="{{ product.picture.url }}" alt="Card image cap"></a>
+            <div class="card-block">
+             <a href="{{product.get_absolute_url}}><h5 class="card-title mt-1 mb-0" style="color:white; font-size: 18px; font-family: 'Segoe UI';"><b>{{product.title}}</b></h5><a href="#"></a>
+                <p class="card-text text-muted mb-1" style="color:white;">{{product.developer.title}}</p>
+                 <p class="item-price card-text text-muted"><b style="color:white;"> {{product.price}}</b></p>
+            </div>
+        </div>
+		</div>
+        <span></span>
+        {%endfor%}
+       </div> 
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{%extends "base.html "%}
+{%block content%}
+<div class="container">
+<section>
+
+  <!-- Grid row -->
+  <div class="row">
+    {% if wishlist %}
+        {%for product in wishlist%}
+            <!-- Grid column -->
+    <div class="col-md-4 mb-5">
+
+      <!-- Card -->
+      <div class="">
+
+        <div class="view zoom overlay z-depth-2 rounded">
+          <img class="img-fluid w-100"
+            src="{{product.picture.url}}" alt="Sample">
+          <a href="#!">
+            <div class="mask">
+              <img class="img-fluid w-100"
+                src="{{product.picture.url}}">
+              <div class="mask rgba-black-slight"></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="text-center pt-4">
+
+          <h5>{{product.title}}</h5>
+          <p class="mb-2 text-muted text-uppercase small">{{product.category}}</p>
+          
+          <hr>
+          <h6 class="mb-3">{{product.price}}$</h6>
+          <button type="button" class="btn btn-primary btn-sm mr-1 mb-2"><i
+              class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+          <a type="button" class="btn btn-light btn-sm mr-1 mb-2" href="{{product.get_absolute_url}}"><i
+              class="fas fa-info-circle pr-2"></i>Details</a>
+          <a type="button" class="btn btn-elegant btn-sm px-3 mb-2 material-tooltip-main"
+            data-toggle="tooltip" href="{% url 'accounts:user_wishlist' product.id %}"data-placement="top" title="Remove from wishlist"><i
+              class="fas fa-times"></i></a>
+
+        </div>
+
+      </div>
+      <!-- Card -->
+
+    </div>
+    <!-- Grid column -->
+        {% endfor %}
+    {% else %}
+    <p class="text-white">There are no items in your wishlist :(</p>
+    {% endif %}
+    
+
+ 
+
+
+
+  </div>
+  <!-- Grid row -->
+</section>
+{%endblock%}
